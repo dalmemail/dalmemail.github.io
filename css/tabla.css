@@ -1,0 +1,41 @@
+/* Copyright (C) 2014, 2015, 2016, 2017 Francisco Dominguez <http://hispagnu.org> */
+table {
+   border:1px solid #333;
+   background:#eee;
+   width:100%;
+   padding:5px;
+   border-radius:14px; 
+   -moz-border-radius:14px;
+   -webkit-border-radius:14px;
+	
+}
+td {
+   width: 25%;
+   text-align: center;
+   vertical-align: center;
+	
+	padding-top: 15px;
+	padding-bottom: 15px;
+
+}
+
+.cabecera {
+
+font: bold 15px Arial;
+background: #bd0000;
+padding: 0px;
+border:1px solid #333;
+color: white;
+
+border-radius:5px; 
+   -moz-border-radius:5px;
+   -webkit-border-radius:5px;
+
+}
+
+table a {
+
+text-decoration: none;
+color: #036;
+
+}
