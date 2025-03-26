@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>How to debug a stack overflow</title>
+<link rel="shortcut icon" href="../imagenes/favicon.png">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="../css/estilos.css" />
+</head>
+<body>
+
+<div id="contenedor">
+
+	<div id="encabezado">
+		<h1 class="centrado">How to debug a stack overflow</h1>
+			<p class="centrado"><a href="../index.html"><img src="../imagenes/logo.png" alto="logo" /></a></p>
+		<h2 class="centrado">Effective techniques to see what's going on</h2>
+		 
+	</div>
+
+	<div id="nav">
+		<ul>
+
+		<li><a href="../index.html">Index</a></li>
+		</ul>
+
+
+	</div>
+
+	<div id="cuerpo">
+		<h3 class="centrado">How to debug a stack overflow</h3>
+		
+		<div id="pagina">
+		<p>Just use GCC/Clang AddressSanitizer. It works by passing the -fsanitize=address flag
+		to the compiler AND the linker. It should report any issues during runtime. It's not compatible
+		with Valgrind.
+		</p>
+		<p>When using it to debug something that involves pthread multithreading a message
+		 "AddressSanitizer CHECK failed" can happen. To fix just disable use_sigaltstack by setting
+		the shell variable ASAN_OPTIONS=use_sigaltstack=0. See
+		<a href="https://github.com/google/sanitizers/issues/1171">this comment</a> for more info.
+		</p>
+		<p>If the error "AddressSanitizer:DEADLYSIGNAL" appears (usually multiple times before a
+		segmentation fault) it's caused by the <a href="https://en.wikipedia.org/wiki/Address_space_layout_randomization">
+		address space layout randomization (ASLR)</a> and disabling it fixes the issue. On Linux this means:
+		</p>
+		<p>$ echo 0 | sudo tee /proc/sys/kernel/randomize_va_space</p>
+		Re-enable it once you're done:
+		<p>$ echo 2 | sudo tee /proc/sys/kernel/randomize_va_space</p>
+		<p>More info available at <a href="https://stackoverflow.com/questions/78136716/addresssanitizerdeadlysignal-from-fsanitize-address-flag">
+		StackOverflow</a>.</p>
+		<h4 class="centrado">Useful links</h4>
+		<a href="https://wiki.gentoo.org/wiki/AddressSanitizer">AddressSanitizer (Gentoo wiki)</a>
+	</div>
+	</div>
+
+	
+
+
+
+
+</div>
+<div id="pie">
+	<hr />
+		<p class="centrado"> Esta página se visualiza mejor con software libre: </p>
+		<p class="centrado"><a target="_blank" href="http://www.gnu.org/software/gnuzilla/"><img src="../imagenes/icecat.jpg"  alt="icecat" /></a></p>
+	</div>
+</body>
+</html>
