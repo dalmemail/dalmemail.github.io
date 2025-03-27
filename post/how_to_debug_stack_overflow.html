@@ -48,8 +48,26 @@
 		<p>$ echo 2 | sudo tee /proc/sys/kernel/randomize_va_space</p>
 		<p>More info available at <a href="https://stackoverflow.com/questions/78136716/addresssanitizerdeadlysignal-from-fsanitize-address-flag">
 		StackOverflow</a>.</p>
-		<h4 class="centrado">Useful links</h4>
-		<a href="https://wiki.gentoo.org/wiki/AddressSanitizer">AddressSanitizer (Gentoo wiki)</a>
+		<h5 class="centrado">How to know in which line of code the overflow happend?</h5>
+		<p>Usually the sanitizer will print lots of details, but other times it's a bit more cryptic. For example:</p>
+
+		<p>/prbsft/bins/Main(_Z5FuncCv+0x14)[0x5571ea64dd80]</p>
+
+		<p>Let's imagine we get a stack overflow at this value of the PC. Well, first of all we notice there are two different
+		addresses. AFAIK 0x5571ea64dd80 is the real (virtual) address at which the overflow happened. However, the address that
+		matters is +0x14, which is a relative address to the VMA of the .text section in the ELF file. Using the
+		<a href="https://linux.die.net/man/1/addr2line">addr2line</a> command
+		we get the file + line of the C code that was translated into the instruction at 0x5571ea64dd80:</p>
+
+		<p>$ addr2line -e path/to/elf +0x14</p>
+
+		<h5 class="centrado">Useful links</h5>
+		<p>&bull; <a href="https://wiki.gentoo.org/wiki/AddressSanitizer">AddressSanitizer (Gentoo wiki)</a></p>
+
+		<p>&bull; <a href="https://stackoverflow.com/questions/56046062/linux-addr2line-command-returns-0">Linux addr2line command returns ??:0</a></p>
+
+		<p>&bull; <a href="https://stackoverflow.com/questions/51595071/addr2line-returns-0-even-when-compiled-with-g3-gdb-backtrace-works">
+		addr2line returns ??:0 even when compiled with -g3, gdb backtrace works</a></p>
 	</div>
 	</div>
 
