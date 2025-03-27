@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Core dump analysis</title>
+<link rel="shortcut icon" href="../imagenes/favicon.png">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="../css/estilos.css" />
+</head>
+<body>
+
+<div id="contenedor">
+
+	<div id="encabezado">
+		<h1 class="centrado">Core dump analysis</h1>
+			<p class="centrado"><a href="../index.html"><img src="../imagenes/logo.png" alto="logo" /></a></p>
+		<h2 class="centrado">Leveraging core dump information for debugging</h2>
+		 
+	</div>
+
+	<div id="nav">
+		<ul>
+
+		<li><a href="../index.html">Index</a></li>
+		</ul>
+
+
+	</div>
+
+	<div id="cuerpo">
+		<h3 class="centrado">Core dump</h3>
+		
+		<div id="pagina">
+		<p>A <a href="https://en.wikipedia.org/wiki/Core_dump">core dump</a> is a snapshot of a program memory at a given
+		time, usually written to a plain-text file. They're generated whenever a program triggers a fatal error (such as
+		a segmentation fault).</p>
+		<p>Core dumps can be used to assist debugging by looking at their raw content, or -better- by loading them into GDB.
+		For this we need the binary file of the program that generated the code dump, compiled with debugging symptoms.</p>
+		<p>$ gdb path/to/binary path/to/core/dump</p>
+
+		<p>Using the backtrace (bt) command we can get a stack trace from the time of the crash. Using the (frame number)
+		command we can switch GDB to the frame number 'number' and evaluate the value of different variables there (using print
+		name_of_variable).</p>
+
+		<h5 class="centrado">Obtaining core dumps on Linux (systemd)</h5>
+		<p>On systemd core dumps are stored at /var/lib/systemd/coredump, only if the package systemd-coredump (debian/ubuntu) is
+		installed on the system. Then it's possible to list existing coredumps with the $ coredumpctl command. By default core
+		dumps are compressed with zstd (.zst format). It's necessary to decompress them before passing the dump to GDB. Just run:</p>
+		<p>$ unzstd path/to/file</p>
+		<h5 class="centrado">Useful links</h5>
+		<p>&bull; <a href="https://stackoverflow.com/questions/5115613/core-dump-file-analysis">Core dump analysis (StackOverflow)</a></p>
+	</div>
+	</div>
+
+	
+
+
+
+
+</div>
+<div id="pie">
+	<hr />
+		<p class="centrado"> Esta página se visualiza mejor con software libre: </p>
+		<p class="centrado"><a target="_blank" href="http://www.gnu.org/software/gnuzilla/"><img src="../imagenes/icecat.jpg"  alt="icecat" /></a></p>
+	</div>
+</body>
+</html>
